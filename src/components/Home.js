@@ -7,13 +7,12 @@ import Grid from "./elements/Grid";
 import MovieThumb from "./elements/MovieThumb";
 import LoadMoreBtn from "./elements/LoadMoreBtn";
 import Spinner from "./elements/Spinner";
-import {getCurrentPage, getHeroImageMovie, getMovies} from "../redux/selectors/selectors";
-import {fetchMoreMovie, fetchMoviesThunk} from "../redux/thunks/thunksCreator";
+import {getCurrentPage, getHeroImageMovie, getMovies, getSearch} from "../redux/selectors/selectors";
+import {fetchMoreMovie, fetchMoreSearchMovie, fetchMoviesThunk, fetchSearchMovie} from "../redux/thunks/thunksCreator";
 import {connect} from "react-redux";
 import {BACKDROP_SIZE, IMAGE_BASE_URL, POSTER_SIZE} from "../config";
 import NoImage from "./images/no_image.jpg"
 const Home = (props) => {
-    debugger
     useEffect(async () => props.fetchMoviesThunk(),[])
     return (
         <>
@@ -23,8 +22,8 @@ const Home = (props) => {
                            title={props.HeroImageMovie.title}
                            text={props.HeroImageMovie.overview} />
                            : <Spinner/>}
-            <Search/>
-            <Grid header={"Popular Movies"} >
+            <Search fetchSearchMovie={props.fetchSearchMovie}/>
+            <Grid header={props.SearchStatus?"Search Results":"Popular Movies"} >
                 {props.movies.map(movie =>(
                     <MovieThumb
                         key={movie.id}
@@ -40,7 +39,7 @@ const Home = (props) => {
                 ))}
             </Grid>
 
-            <LoadMoreBtn fetchMoreMovie={props.fetchMoreMovie} CurrentPage={props.CurrentPage} />
+            <LoadMoreBtn fetchMoreMovie={props.SearchStatus?props.fetchMoreSearchMovie:props.fetchMoreMovie} SearchStatus={props.SearchStatus} CurrentPage={props.CurrentPage} />
         </>
     )
 }
@@ -49,10 +48,13 @@ let mapStateToProps = state =>({
     movies : getMovies(state) ,
     HeroImageMovie : getHeroImageMovie(state),
     CurrentPage : getCurrentPage(state),
+    SearchStatus :getSearch(state),
 })
 let mapDispatchToProps = {
     fetchMoviesThunk: fetchMoviesThunk,
-    fetchMoreMovie:fetchMoreMovie
+    fetchMoreMovie:fetchMoreMovie,
+    fetchSearchMovie : fetchSearchMovie,
+    fetchMoreSearchMovie:fetchMoreSearchMovie,
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Home)

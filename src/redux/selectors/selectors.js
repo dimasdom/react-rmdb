@@ -10,3 +10,7 @@ export const getHeroImageMovie = state => {
 export const getCurrentPage = state =>{
     return state.Movies.currentpage
 }
+
+export const getSearch = state =>{
+    return state.Movies.search
+}

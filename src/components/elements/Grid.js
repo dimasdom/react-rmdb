@@ -3,10 +3,10 @@ import React from 'react';
 import {StyledGrid} from "../styles/StyledGrid";
 import {StyledGridContent} from "../styles/StyledGrid";
 
-const Grid = ({movies,children}) => {
+const Grid = ({header,children}) => {
     return(
         <StyledGrid>
-            <h1>Popular Movie</h1>
+            <h1>{header}</h1>
             <StyledGridContent>
                 {children}
             </StyledGridContent>
