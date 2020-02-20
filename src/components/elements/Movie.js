@@ -8,6 +8,7 @@ import Spinner from "./Spinner";
 import {fetchFilm} from "../../redux/thunks/thunksCreator";
 import {connect} from "react-redux";
 import {getCredits, getDetails} from "../../redux/selectors/selectors";
+import {Link} from "@reach/router";
 
 
 let Movie = ({movieId,fetchFilm,Details,Credits}) =>{
@@ -19,7 +20,6 @@ let Movie = ({movieId,fetchFilm,Details,Credits}) =>{
     }
     useFetching(fetchFilm,movieId)
 let Director = Credits.crew ? Credits.crew.filter(m=>m.job === "Director") : "None" ;
-    console.log(Director)
     return (
     <>
         <Navigation movie={Details.original_title}/>
@@ -27,7 +27,7 @@ let Director = Credits.crew ? Credits.crew.filter(m=>m.job === "Director") : "No
         <MovieInfoBar time={Details.runtime} budget={Details.budget} revenue={Details.revenue}/>
         <Grid header={"Actors"}>
             {Credits.cast ?  Credits.cast.map(actor=>(
-                <Actor key={actor.credit_id} actor={actor}/>
+                <Actor key={actor.credit_id} id={actor.id} actor={actor}/>
             )):<Spinner/>}
 
         </Grid>

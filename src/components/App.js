@@ -6,6 +6,8 @@ import {createGlobalStyle} from'styled-components'
 import {Router} from "@reach/router";
 import Movie from "./elements/Movie";
 import Header from "./elements/Header";
+import Person from "./elements/Person";
+import Footer from "./elements/Footer";
 
 const GlobalStyle = createGlobalStyle`
 body{
@@ -21,7 +23,9 @@ const App = () => (<div>
         <Router>
             <Home path="/"/>
             <Movie path="/:movieId" />
+            <Person path="/person/:personId"/>
         </Router>
+        <Footer/>
     <GlobalStyle/>
     </Provider>
 </div>);

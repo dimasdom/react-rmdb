@@ -3,6 +3,7 @@ import No_image from "../images/no_image.jpg"
 import {IMAGE_BASE_URL,POSTER_SIZE} from "../../config";
 import MovieThumb from "./MovieThumb";
 import {StyledMovieInfo} from "../styles/StyledMovieInfo";
+import Spinner from "./Spinner";
 const MovieInfo = ({movie,Director}) => {
     debugger
     let DirectorShowing = []
@@ -30,7 +31,7 @@ const MovieInfo = ({movie,Director}) => {
                         <div className={"director"}>
                             <h3>DIRECTORS</h3>
                             {
-                                Director === "None" ? "None"  : Director.map(m=> <p key={m.credit_id}>{m.name}</p>)
+                                Director === "None" ? <Spinner/>  : Director.map(m=> <p key={m.credit_id}>{m.name}</p>)
 
                             }
                         </div>
