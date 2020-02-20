@@ -1,5 +1,12 @@
-import {fetchMoreMoviesAC, fetchMoviesAC, fetchSearchMovieAC} from "../actionCreators/actionCreators";
-import {getMoreMoviesAPI, getMoreSearchMoviesAPI, getMoviesAPI, getSearchResultMovieAPI} from "../api/api";
+import {fetchFilmAC, fetchMoreMoviesAC, fetchMoviesAC, fetchSearchMovieAC} from "../actionCreators/actionCreators";
+import {
+    getFilmCreditsByIdAPI,
+    getFilmDetailsByIdAPI,
+    getMoreMoviesAPI,
+    getMoreSearchMoviesAPI,
+    getMoviesAPI,
+    getSearchResultMovieAPI
+} from "../api/api";
 
 export const fetchMoviesThunk = () => async (dispatch) =>{
     let Movies = await getMoviesAPI();
@@ -19,4 +26,10 @@ export const fetchSearchMovie = (search) => async (dispatch)=>{
 export const fetchMoreSearchMovie = (page,search) => async (dispatch)=>{
     let Movies = await getMoreSearchMoviesAPI(search,page);
     dispatch(fetchMoreMoviesAC(Movies))
+}
+
+export const fetchFilm = id => async (dispatch) =>{
+    let FilmDetails = await getFilmDetailsByIdAPI(id);
+    let FilmCredits = await getFilmCreditsByIdAPI(id);
+    dispatch(fetchFilmAC(FilmDetails,FilmCredits))
 }

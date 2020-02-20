@@ -1,6 +1,4 @@
 import React, {useEffect} from 'react'
-
-import Header from "./elements/Header";
 import HeroImage from "./elements/HeroImage";
 import Search from "./elements/Search";
 import Grid from "./elements/Grid";
@@ -12,11 +10,17 @@ import {fetchMoreMovie, fetchMoreSearchMovie, fetchMoviesThunk, fetchSearchMovie
 import {connect} from "react-redux";
 import {BACKDROP_SIZE, IMAGE_BASE_URL, POSTER_SIZE} from "../config";
 import NoImage from "./images/no_image.jpg"
+
 const Home = (props) => {
-    useEffect(async () => props.fetchMoviesThunk(),[])
+    const useFetching = someFetchActionCreator => {
+        useEffect( () => {
+            someFetchActionCreator();
+        }, [])
+    }
+    useFetching(props.fetchMoviesThunk)
     return (
         <>
-            <Header/>
+
             {props.HeroImageMovie?
                 <HeroImage image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${props.HeroImageMovie.backdrop_path}`}
                            title={props.HeroImageMovie.title}

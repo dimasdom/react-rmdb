@@ -2,6 +2,7 @@ import React from 'react';
 import RMDBLogo from '../images/reactMovie_logo.png'
 import TMDBLogo from '../images/tmdb_logo.svg'
 import styled from 'styled-components'
+import {Link} from '@reach/router'
 const Header = () => {
     let StyledHeader = styled.div`
     background:#1c1c1c;
@@ -44,8 +45,10 @@ margin-top:0px;
 return (
     <StyledHeader>
         <div>
+            <Link to={'/'}>
             <StyledRMDBLogo src={RMDBLogo} alt='RMDBLogo' />
             <StyledTMDBLogo src={TMDBLogo} alt='TMDBLogo' />
+            </Link>
         </div>
     </StyledHeader>)
 }

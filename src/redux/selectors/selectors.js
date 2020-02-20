@@ -1,5 +1,4 @@
 export const getMovies = state => {
-    debugger
     return state.Movies.Films
 }
 
@@ -14,3 +13,12 @@ export const getCurrentPage = state =>{
 export const getSearch = state =>{
     return state.Movies.search
 }
+
+export const getDetails = state =>{
+    return state.Film.Details
+}
+
+export const getCredits = state =>{
+    return state.Film.Credits
+}
+
